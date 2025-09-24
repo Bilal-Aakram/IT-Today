@@ -22,5 +22,10 @@ struct Post : Decodable, Identifiable {
     let objectID : String
     let title : String
     let url : String?
+    let author : String
+    let created_at_i : Int
     
 }
+
+
+
