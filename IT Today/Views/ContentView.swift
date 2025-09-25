@@ -11,14 +11,20 @@ import SwiftUI
 struct ContentView: View {
     
     @ObservedObject var networkManager = NetworkManager()
-    
+    @StateObject private var viewModel = PostViewModel()
     var body: some View {
         NavigationStack {
             List(networkManager.posts){post in
                 NavigationLink(destination: DetailView(url : post.url)) {
-                    HStack {
-                        Text("Points:\(String(post.points))")
+                    VStack(alignment: .leading) {
                         Text(post.title)
+                            .font(.system(size: 20) .bold())
+                            .lineLimit(1)
+                        HStack{
+                            Text(post.author)
+                            Spacer()
+                            Text(viewModel.timeAgo(from: post.created_at_i))
+                        }
                     }
                 }
             }
